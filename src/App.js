@@ -14,10 +14,12 @@ class App extends Component {
     const response = await fetch(url);
     const data = await response.json();
     // console.log(data["paid"].length);
-    console.log(data.paid[0]);
+    // console.log(data.paid[0]);
     this.setState({ conference: data.free });
+    // console.log(this.state.conference);
     // this.setState({ conference: data.free });
-    this.setState({ conference: [...this.state.conference, data.paid] });
+    this.setState({ conference: this.state.conference.concat(data.paid) });
+    // console.log(this.state.conference);
   }
   render() {
     return (

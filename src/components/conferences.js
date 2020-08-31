@@ -6,6 +6,12 @@ import Image from "react-bootstrap/Image";
 const Conferences = (props) => {
   // console.log(props);
   // console.log("");
+  const style = {
+    display: "block",
+    justifyContent: "center",
+    alignItems: "left"
+  };
+
   if (!props.conference) {
     return <div>didn't get a person</div>;
   } else {
@@ -19,6 +25,8 @@ const Conferences = (props) => {
                 src={conference.imageURL}
                 width={150}
                 mode="fill"
+                alt={conference.confName}
+                style={style}
                 thumbnail
               />
               <h5 class="card-title">{conference.confName}</h5>
