@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Conferences from "./components/conferences";
+import SearchBox from "./components/searchbox";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      conference: []
+      conference: [],
+      searchField: ""
     };
   }
   async componentDidMount() {
@@ -21,14 +23,34 @@ class App extends Component {
     this.setState({ conference: this.state.conference.concat(data.paid) });
     // console.log(this.state.conference);
   }
+
+  handleChange = (e) => {
+    this.setState({ searchField: e.target.value });
+  };
+  // transform(items: any[], filterQuery: any): any[] {
+  //   if (!filterQuery) return items;
+  //   return items.filter(item => item.whateverProperty.toLowerCase().includes(filterQuery.toLowerCase()));
+  // }
+
   render() {
+    console.log(this.state);
+    const { conference, searchField } = this.state;
+    // console.log(conference);
+    const filteredCountries = conference.filter((props) =>
+      props.confName.toLowerCase().includes(searchField.toLowerCase())
+    );
     return (
       <div>
         <center>
           <h1>Konfhub</h1>
         </center>
+        <SearchBox
+          placeholder="Enter conference name ..."
+          handleChange={this.handleChange}
+        />
         <h4> Conferences: </h4>
-        <Conferences conference={this.state.conference} />
+        {/* <Conferences conference={this.state.conference} /> */}
+        <Conferences conference={filteredCountries} />
       </div>
     );
   }
